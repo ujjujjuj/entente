@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Register</title>
+    </head>
+    <body>
+        <form action ="/login" method="POST">
+            <input type="text" placeholder="Email" name="email">
+            <input type="password" placeholder="Password" name="password">
+            <input type="submit">
+        </form>
+        <% if(locals.error){ %>
+            <span class="error"><%= locals.error %></span>
+        <% } %>
+    </body>
+</html>
