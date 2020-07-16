@@ -25,7 +25,7 @@ const getUID = async function(req,res,next){
 		}
         uid = authData;
     });
-    req.id = uid.id;
+    req.id = uid._id;
     next();
 }
 

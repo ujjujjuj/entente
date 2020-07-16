@@ -11,7 +11,8 @@ function render(input){
             <div class = "projectInfo">
                 <span class = "projectName">${input[i].name}</span>
                 <span class = "memberCount">${input[i].members} members</span>
-                <button class = "openProject" onclick="window.location.href='/${input[i].name}'">Open</button>
+                <span class = "description">${input[i].description}</span>
+                <button class = "openProject" onclick="window.location.href='/projects/${input[i].name}'">Open</button>
             </div>
         `)
     }

@@ -12,6 +12,66 @@
         <link href = "/css/notes.css" rel="stylesheet">
     </head>
     <body>
+        <nav>
+            <img src = "/img/logo.png">
+            <div class="middle">
+                <i class="fa fa-folder active" aria-hidden="true"></i>
+                <i class="fa fa-bell" aria-hidden="true"></i>
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </div>
+            <div class="end">
+                <img src = "/img/default.png">
+            </div>
+        </nav>
+        <div class="container">
+            <div class="sidebar">
+                <div class = "active">
+                    <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+                    Notes
+                </div>
+                <div>
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    Issues
+                </div>
+                <div>
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    Tasks
+                </div>
+                <div>
+                    <i class="fa fa-file-archive-o" aria-hidden="true"></i>
+                    Files
+                </div>     
+            </div>
+            <div class="main">
+                <div class="search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <input id = "searchBar" placeholder="Search">
+                </div>
+                <div class = "addNote">
+                    <span class="head">Notes</span>
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                </div>
+                <div id="noteContainer">
+                
+                </div>
+            </div>
+            <div id="members">
+                <div id = 'memberContainer'>
+
+                </div>    
+            </div>
+        </div>
+        <div class = "modal">
+            <div class = "noteForm">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class = "head">New Note</span>
+                <div class="divider"></div>
+                <form method="POST">
+                    <textarea type="text"placeholder="Note description" name="description"></textarea>
+                    <input type="submit" value="Create Note"> 
+                </form>
+            </div>
+        </div>
         
     </body>
 </html>

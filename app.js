@@ -40,7 +40,7 @@ app.use("/",authRoute);
 
 //notes(view/create)
 const notesRoute = require('./routes/notes')
-app.use("/:project/notes",notesRoute)
+app.use("/project/:project/notes",notesRoute)
 
 app.listen(port,() => {
     console.log("Listening on port "+port);

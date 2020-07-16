@@ -6,6 +6,11 @@ const projectSchema = new mongoose.Schema({
 		required:true,
 		max:255
 	},
+	description:{
+		type:String,
+		default:"A project",
+		max:255
+	},
 	members:{
 		type:Array,
 		default:[]

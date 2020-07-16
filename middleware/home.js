@@ -57,7 +57,7 @@ const sendInvite = async function(req,res,projectName,projectID){
 }
 
 const filterProject = async function(project){
-    return {name:project.name,members:project.members.length}
+    return {name:project.name,members:project.members.length,description:project.description}
 }
 
 module.exports = {

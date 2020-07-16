@@ -25,6 +25,7 @@ router.post("/home",getUID,async (req,res)=>{
     //create and save project + make user admin
     let project = new Project({
         name:req.body.projectName.replace(/\s+/g,"").toLowerCase(),
+        description:req.body.description,
         members:[{name:user.name,type:"admin"}],
         date:Date.now() + 1000*60*60*5.5
     });
@@ -93,10 +94,6 @@ router.get("/join/:token",async (req,res)=>{
     await project.save();
     await user.save();
     res.redirect('/home');
-})
-
-router.get("/:project", async (req,res) => {
-    return res.redirect("/"+req.params.project+"/goals");
 })
 
 module.exports=router;
