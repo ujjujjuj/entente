@@ -1,4 +1,4 @@
-const User = require('../models/User.js')
+const User = require('../models/User.js');
 const path = require('path');
 
  const registerMiddleware = async function registerMiddleware(req,res,next){

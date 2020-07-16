@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <script>
+            const projects = JSON.parse('<%- JSON.stringify(locals.projects) %>');
+        </script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <script src = "/js/home.js" defer></script>
+        <link href = "css/home.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class = "container">
+
+            <div class = "top">
+                <span class = "head">Your Projects</span>
+                <% if(isAdmin){ %>
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                <% } %>
+            </div>
+            
+            <div class="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id = "searchBar" placeholder="Search">
+            </div>
+
+            <div class = "projects">
+
+            </div>
+
+            <div class = "modal">
+                <div class = "projectForm">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    <span class = "head">Create project</span>
+                    <div class="divider"></div>
+                    <form method="POST" action="/home">
+                        <input type="text" placeholder="Project name" name="projectName">
+                        <input type="submit" value="Create"> 
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

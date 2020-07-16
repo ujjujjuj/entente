@@ -16,15 +16,14 @@ const userSchema = new mongoose.Schema({
 		required:true,
 		max:255
 	},
-    organization:{
-        type:String,
-        default:null,
-        max:255
-    },
 	isAdmin:{
 		type:Boolean,
 		default:false
 	},
+    projects:{
+        type:Array,
+        default:null
+    },
 	date:{
 		type:Date,
 		required:true

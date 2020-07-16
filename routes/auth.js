@@ -25,7 +25,6 @@ router.post("/register",registerMiddleware,async (req,res) => {
         name:req.body.name,
         email:req.body.email,
         password:hashedPassword,
-        isAdmin:false,
         date:Date.now() + 1000*60*60*5.5
     });
     //save user and assign jwt

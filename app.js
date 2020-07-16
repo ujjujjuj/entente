@@ -15,7 +15,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 const port = process.env.PORT || 8080;
-
+//database setup
 const config = {
 	useUnifiedTopology: true,
   	useNewUrlParser: true
@@ -30,9 +30,17 @@ app.get("/",(req,res) => {
     res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
+//project(view projects/create new ones)
+const projectRoute = require("./routes/home")
+app.use("/",projectRoute);
+
 //login/reg
 const authRoute = require("./routes/auth");
 app.use("/",authRoute);
+
+//notes(view/create)
+const notesRoute = require('./routes/notes')
+app.use("/:project/notes",notesRoute)
 
 app.listen(port,() => {
     console.log("Listening on port "+port);
