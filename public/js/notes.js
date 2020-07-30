@@ -7,48 +7,67 @@ const modal = document.querySelector(".modal");
 
 function renderMembers(input){
     let admins = '<span class="head">Admins</span>\n';
-    let members = '<span class="head">Members</span>\n';
+    let users = '<span class="head">Users</span>\n';
     let customers = '<span class="head">Customers</span>\n';
     input.forEach(member => {
-        let elem = `<span><img src = "/img/default.png">${member.name}<span>\n`
+        let elem = `<span><img src = "/img/default.png">${member.name}</span>\n`
         if(member.type == "admin"){
             admins += elem
-        }else if(member.type == "member"){
-            members += elem
+        }else if(member.type == "user"){
+            users += elem
         }else{
             customers += elem;
         }
     });
     memberContainer.innerHTML = (
         "<div class='admins'>"+admins+"</div>"+
-        "<div class='members'>"+members+"</div>"+
+        "<div class='users'>"+users+"</div>"+
         "<div class='customers'>"+customers+"</div>"
     )
 }
 
-function renderNotes(notes){
+function renderNotes(notes,isAdmin){
     let out = '';
     notes.forEach(note => {
+        console.log(note)
         let date = new Date(note.date).toISOString().replace("T"," ").replace("Z"," ").slice(0,-4)
-        out += (`
-        <div class = "noteHolder">
-            <div class = "note">
-                <span class = "date">${date}</span>
-                <span class = "desc">${note.description}</span>
-                <img src = "/img/trash.png">
+        if(isAdmin){
+            out += (`
+            <div class = "noteHolder">
+                <div class = "note" id = "${note.id}">
+                    <span class = "date">${date}</span>
+                    <span class = "desc">${note.description}</span>
+                    <img src = "/img/trash.png" onclick=deleteNote(this.parentNode.id)>
+                </div>
             </div>
-        </div>
-        `)
+            `)
+        }else{
+            out += (`
+            <div class = "noteHolder">
+                <div class = "note" id = "${note.id}">
+                    <span class = "date">${date}</span>
+                    <span class = "desc">${note.description}</span>
+                </div>
+            </div>
+            `)
+        }
     });
     noteContainer.innerHTML = out;
+}
+
+function deleteNote(id){
+    let url = window.location.href+"/delete?id="+id
+    console.log(url);
+    fetch(url,{method:"POST"})
+    window.location.reload();
 }
 
 searchBar.addEventListener("keyup",(e) => {
     let searchString = e.target.value;
     let filtered = notes.filter( note => {
-        return note.description.includes(searchString)
+        return note.description.toLowerCase().includes(searchString.toLowerCase())
     });
-    renderNotes(filtered)
+    renderNotes(filtered,isAdmin)
 });
 
 addNote.addEventListener("click",()=>{
@@ -60,4 +79,4 @@ modalClose.addEventListener("click",()=>{
 })
 
 renderMembers(members)
-renderNotes(notes)
+renderNotes(notes,isAdmin)

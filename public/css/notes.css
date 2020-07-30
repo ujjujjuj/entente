@@ -68,7 +68,7 @@ nav img{
 }
 .main{
     height:100%;
-    padding:0 8%;
+    padding:0 5%;
     flex: 1;
     overflow-y: scroll;
 }
@@ -84,6 +84,9 @@ nav img{
     display: flex;
     flex-direction: column;
     margin:60px 0;
+    padding:0 30px;
+    display: flex;
+    flex-direction: column;
 }
 #memberContainer img{
     width:30px;
@@ -139,6 +142,7 @@ nav img{
 #noteContainer{
     margin-top:30px;
     column-count: 3;
+    column-gap: 40px;;
 }
 .noteHolder{
     display: inline-block;
@@ -152,7 +156,7 @@ nav img{
     flex-direction: column;
     border-radius: 10px;
     width: 100%;
-    padding:30px;
+    padding:30px ;
 }
 .note .date{
     opacity: 0.5;

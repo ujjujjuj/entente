@@ -5,15 +5,16 @@ const jwt = require("jsonwebtoken");
 const router = require('express').Router({mergeParams:true});
 const { getUID,filterNotes } = require('../middleware/notes.js');
 const Project = require('../models/Project.js');
+const { Types } = require("mongoose");
 
 router.get("/",getUID,async (req,res)=>{
     let user = await User.findOne({_id:req.id});
     let project = await Project.findOne({name:req.params.project})
-    if(!user.projects.includes(project._id)){
-        return res.send("not member");
-    }
     if(!project){
         res.send("project doesnt exist");
+    }
+    if(!user.projects.includes(project._id)){
+        return res.send("not member");
     }
     let notes = await Note.find({project:req.params.project}).sort({'date': -1})
     notes = await filterNotes(notes);
@@ -28,6 +29,13 @@ router.post("/",getUID,async (req,res)=>{
     })
     await note.save()
     return res.redirect(`/project/${req.params.project}/notes`)
+});
+router.post("/delete",getUID,async (req,res)=>{
+    console.log(req.query.id);
+    await Note.deleteOne({_id:Types.ObjectId(req.query.id)},(err)=>{
+        console.log(err)
+    });
+    return res.redirect("/project/"+req.params.project+"/notes");
 });
 
 module.exports = router

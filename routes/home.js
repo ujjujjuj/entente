@@ -8,6 +8,10 @@ const { Types } = require("mongoose");
 
 router.get("/home",getUID,async (req,res)=>{
     let user = await User.findOne({_id:req.id});
+    console.log(req.id)
+    if(!user){
+        return res.send("error");
+    }
     let projectIDs = user.projects;
     projects = []
     for(i=0;i<projectIDs.length;i++){
@@ -44,7 +48,7 @@ router.post("/home",getUID,async (req,res)=>{
     }
 });
 
-router.get("/:project/invite",getUID,async (req,res) => {
+router.get("/project/:project/invite",getUID,async (req,res) => {
     let user = await User.findOne({_id:req.id});
     let project = await Project.findOne({name:req.params.project});
     if(!project){
@@ -59,10 +63,10 @@ router.get("/:project/invite",getUID,async (req,res) => {
         }
     });
     //send form
-    return res.send("invite form")
+    return res.render(path.join(__dirname + '/../views/invite.html'));
 });
 
-router.post("/:project/invite", getUID, async (req,res) => {
+router.post("/project/:project/invite", getUID, async (req,res) => {
     let user = await User.findOne({_id:req.id});
     let project = await Project.findOne({name:req.params.project});
     project.members.forEach((member)=>{
@@ -72,8 +76,10 @@ router.post("/:project/invite", getUID, async (req,res) => {
             }
         }
     });
+    console.log(req.params.project, req.body.type)
     //send invite
     await sendInvite(req,res,project.name,project._id);
+    return res.redirect("/home")
 })
 
 router.get("/join/:token",async (req,res)=>{

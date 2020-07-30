@@ -27,7 +27,8 @@ mongoose.connect(process.env.DB_URL,config,function(){
 /*****ROUTES*****/
 
 app.get("/",(req,res) => {
-    res.sendFile(path.join(__dirname + '/views/index.html'));
+    res.redirect("/home")
+   // res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
 //project(view projects/create new ones)

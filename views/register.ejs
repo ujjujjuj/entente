@@ -1,16 +1,23 @@
 <html>
     <head>
         <title>Register</title>
+        <link href = "/css/register.css" rel = "stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <form action ="/register" method="POST">
-            <input type="text" placeholder="Name" name="name">
-            <input type="text" placeholder="Email" name="email">
-            <input type="password" placeholder="Password" name="password">
-            <input type="submit">
-        </form>
-        <% if(locals.error){ %>
+        <div class="container">
+            <img src = "/img/logo.png">
+            <h1>Register</h1>
+            <form action ="/register" method="POST">
+                <input type="text" placeholder="Name" name="name">
+                <input type="text" placeholder="Email" name="email">
+                <input type="password" placeholder="Password" name="password">
+                <input type="submit" value ="Register">
+            </form>
+            <% if(locals.error){ %>
             <span class="error"><%= locals.error %></span>
-        <% } %>
+            <% } %>
+            Already registered?<a href="/login">Login</a>
+        </div>
     </body>
 </html>

@@ -25,8 +25,9 @@ const getUID = async function(req,res,next){
 			return res.redirect('/logout');	
 		}
         uid = authData;
+        console.log(authData)
     });
-    req.id = uid._id;
+    req.id = uid.id;
     next();
 }
 
@@ -45,7 +46,7 @@ const sendInvite = async function(req,res,projectName,projectID){
         subject: "Join Project",
         text: (`Hello,\nYou have been invited to join ${projectName}.\nPlease click on this link to proceed\n`+url)
     };
-    console.log(url)
+    console.log(mailOptions)
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
             return res.send("error")

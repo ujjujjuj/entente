@@ -25,14 +25,14 @@ const getUID = async function(req,res,next){
 		}
         uid = authData;
     });
-    req.id = uid._id;
+    req.id = uid.id;
     next();
 }
 
 const filterNotes = async function(notes){
     filtered = []
     notes.forEach((note) => {
-        filtered.push({description:note.description,date:note.date});
+        filtered.push({description:note.description,date:note.date,id:note._id});
     })
     return filtered
 }

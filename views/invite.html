@@ -1,22 +1,25 @@
 <html>
     <head>
-        <title>Login</title>
-        <link href = "/css/login.css" rel = "stylesheet">
+        <title>Invite</title>
+        <link href = "/css/invite.css" rel = "stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="container">
             <img src = "/img/logo.png">
-            <h1>Login</h1>
-            <form action ="/login" method="POST">
+            <h1>Invite user</h1>
+            <form method="POST">
                 <input type="text" placeholder="Email" name="email">
-                <input type="password" placeholder="Password" name="password">
-                <input type="submit">
+                <select name="type">
+                    <option value="admin">Admin</option>
+                    <option value="user" selected>User</option>
+                    <option value="customer">Customer</option>
+                  </select>
+                  <input type="submit" value = "Invite">
             </form>
             <% if(locals.error){ %>
                 <span class="error"><%= locals.error %></span>
             <% } %>
-            Don't have an account? <a href="/register">Register</a>
         </div>
     </body>
 </html>
