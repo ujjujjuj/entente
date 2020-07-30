@@ -23,9 +23,13 @@ const getUID = async function(req,res,next){
         if(err){
 			return res.redirect('/logout');	
 		}
-        uid = authData;
+        if(authData._id){
+            uid = authData._id;
+        }else{
+            uid = authData.id;
+        }
     });
-    req.id = uid.id;
+    req.id = uid;
     next();
 }
 

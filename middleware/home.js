@@ -23,11 +23,16 @@ const getUID = async function(req,res,next){
     jwt.verify(token,process.env.JWT_SECRET,(err,authData) => {
         if(err){
 			return res.redirect('/logout');	
-		}
-        uid = authData;
+        }
+        if(authData._id){
+            uid = authData._id;
+        }else{
+            uid = authData.id;
+        }
+        
         console.log(authData)
     });
-    req.id = uid.id;
+    req.id = uid;
     next();
 }
 
