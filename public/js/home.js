@@ -41,10 +41,11 @@ searchBar.addEventListener("keyup",(e) => {
     });
     render(filtered,isAdmin)
 });
-
-addProject.addEventListener("click",()=>{
-    modal.style.display = "flex";
-})
+if(addProject){
+    addProject.addEventListener("click",()=>{
+        modal.style.display = "flex";
+    })
+}
 
 modalClose.addEventListener("click",()=>{
     modal.style.display = "none";

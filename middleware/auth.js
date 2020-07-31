@@ -26,6 +26,8 @@ const loginMiddleware = async function loginMiddleware(req,res,next){
     if(!emailExists){
         return res.render(path.join(__dirname + '/../views/login.ejs'),{error:"Email does not exist"});
     }
+    console.log(emailExists)
+    next()
 }
 
 module.exports = {
