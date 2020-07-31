@@ -60,7 +60,6 @@ const sendInvite = async function(req,res,projectName,projectID){
             
         }
     });
-    next();
 }
 
 const filterProject = async function(project){
