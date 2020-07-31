@@ -54,7 +54,7 @@ const sendInvite = async function(req,res,projectName,projectID){
     console.log(mailOptions)
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
-            return res.send("error")
+            return res.send(error)
         } else {
             console.log(info)
             return res.send("success")
