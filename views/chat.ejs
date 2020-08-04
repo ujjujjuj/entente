@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat</title>
+        <script>
+            const members = JSON.parse('<%- JSON.stringify(locals.members) %>');
+            const isAdmin = ('<%- JSON.stringify(locals.isAdmin) %>' == "true");
+        </script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <script defer src = "/socket.io/socket.io.js"></script>
+        <script src = "/js/chat.js" defer></script>
+        <link href = "/css/chat.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <img src = "/img/logo.png">
+            <div class="middle">
+                <i class="fa fa-folder" aria-hidden="true"  onclick = "window.location=window.location.toString().replace('/chat','/goals')"></i>
+                <i class="fa fa-envelope active" aria-hidden="true"></i>
+            </div>
+            <div class="end">
+                <img src = "/img/default2.png">
+            </div>
+        </nav>
+        <div class="container">
+            <div class="main">
+                <div class = "top">
+                    <div class = "sidebar">
+                        <div class = "selector">
+                            <i class="fa fa-video-camera" aria-hidden="true" onclick = "window.open(window.location.toString().replace('/chat','/video'),'','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=730px,height=730px'); return false;"></i>
+                            <i class="fa fa-paper-plane active" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class = "chatContainer">
+
+                    </div>
+                </div>
+                <div class = "chatbox">
+                    <input placeholder="Enter message...">
+                    <i class="fa fa-paper-plane" aria-hidden="true" onclick = sendMessage()></i>
+                </div>
+            </div>
+            <div id="members">
+                <div id = 'memberContainer'>
+
+                </div>    
+            </div>
+        </div>
+        
+    </body>
+</html>

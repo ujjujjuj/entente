@@ -1,5 +1,4 @@
 const User = require('../models/User.js');
-const path = require('path');
 const jwt = require("jsonwebtoken");
 
 const getUID = async function(req,res,next){
@@ -23,15 +22,6 @@ const getUID = async function(req,res,next){
     next();
 }
 
-const filterNotes = async function(notes){
-    filtered = []
-    notes.forEach((note) => {
-        filtered.push({description:note.description,date:note.date,id:note._id});
-    })
-    return filtered
-}
-
 module.exports = {
-    getUID,
-    filterNotes
+    getUID
 }

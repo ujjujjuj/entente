@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Home</title>
+        <title>Goals</title>
         <script>
-            const notes = JSON.parse('<%- JSON.stringify(locals.notes) %>');
+            const goals = JSON.parse('<%- JSON.stringify(locals.goals) %>');
             const members = JSON.parse('<%- JSON.stringify(locals.members) %>');
             const isAdmin = ('<%- JSON.stringify(locals.isAdmin) %>' == "true");
         </script>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <script src = "/js/notes.js" defer></script>
-        <link href = "/css/notes.css" rel="stylesheet">
+        <script src = "/js/goals.js" defer></script>
+        <link href = "/css/goals.css" rel="stylesheet">
     </head>
     <body>
         <nav>
             <img src = "/img/logo.png">
             <div class="middle">
                 <i class="fa fa-folder active" aria-hidden="true"></i>
-                <i class="fa fa-envelope" aria-hidden="true"  onclick = "window.location=window.location.toString().replace('/notes','/chat')"></i>
+                <i class="fa fa-envelope" aria-hidden="true" onclick = "window.location=window.location.toString().replace('/goals','/chat')"></i>
             </div>
             <div class="end">
                 <img src = "/img/default2.png">
@@ -25,22 +25,22 @@
         </nav>
         <div class="container">
             <div class="sidebar">
-                <div>
-                    <i class="fa fa-bullseye" aria-hidden="true" onclick = "window.location=window.location.toString().replace('/notes','/goals')"></i>
+                <div class = "active">
+                    <i class="fa fa-bullseye" aria-hidden="true"></i>
                     Goals
                 </div>
-                <div class = "active">
-                    <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+                <div>
+                    <i class="fa fa-sticky-note-o" aria-hidden="true" onclick = "window.location=window.location.toString().replace('/goals','/notes')"></i>
                     Notes
                 </div>
                 <div>
-                    <i class="fa fa-file-archive-o" aria-hidden="true"  onclick = "window.location=window.location.toString().replace('/notes','/files')"></i>
+                    <i class="fa fa-file-archive-o" aria-hidden="true" onclick = "window.location=window.location.toString().replace('/goals','/files')"></i>
                     Files
                 </div>     
             </div>
             <div class="main">
-                <div class = "addNote">
-                    <span class="head">Notes</span>
+                <div class = "addGoal">
+                    <span class="head">Goals</span>
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                     <i class="fa fa-microphone" aria-hidden="true" onclick = listen()></i>
                 </div>
@@ -48,8 +48,8 @@
                     <i class="fa fa-search" aria-hidden="true"></i>
                     <input id = "searchBar" placeholder="Search">
                 </div>
-                <div id="noteContainer">
-                
+                <div class = "goalContainer">
+                    
                 </div>
             </div>
             <div id="members">
@@ -59,13 +59,14 @@
             </div>
         </div>
         <div class = "modal">
-            <div class = "noteForm">
+            <div class = "goalForm">
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
-                <span class = "head">New Note</span>
+                <span class = "head">New Goal</span>
                 <div class="divider"></div>
                 <form method="POST">
-                    <textarea type="text"placeholder="Note description" name="description"></textarea>
-                    <input type="submit" value="Create Note"> 
+                    <input type="text" name = "title" placeholder = "Title">
+                    <input type="date" name="deadline">
+                    <input type="submit" value="Create Goal"> 
                 </form>
             </div>
         </div>

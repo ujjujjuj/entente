@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
 
-const goalSchema = new mongoose.Schema({
-	title:{
+const fileSchema = new mongoose.Schema({
+	name:{
 		type:String,
 		required:true,
 		max:255
-    },
+	},
+	extension:{
+		type:String,
+		required:true
+	},
     project:{
         type:String,
 		required:true
     },
-    isCompleted:{
-        type:Boolean,
+    data:{
+        type:String,
         default:false
-    },
-    deadline:{
-        type:Date,
-        required:true
     },
 	date:{
 		type:Date,
@@ -24,4 +24,4 @@ const goalSchema = new mongoose.Schema({
 	}
 });
 
-module.exports = mongoose.model("Goal",goalSchema);
+module.exports = mongoose.model("File",fileSchema);

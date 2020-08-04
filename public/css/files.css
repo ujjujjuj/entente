@@ -124,60 +124,62 @@ nav img{
     width: 50%;
     box-shadow: 0 0 10px #0000001E;
 }
-.addNote{
+.addFile{
     display: flex;
     align-items: center;
     margin:25px 0 15px 0;
 }
-.addNote .head{
+.addFile .fa-plus-circle{
+    color:#72E0A9;
+}
+.addFile .head{
     color:#7272E0;
     font-size: 2em;
     font-weight: 700;
 }
-.addNote .fa-plus-circle{
-    color:#72E0A9;
+.addFile .fa-plus-circle{
     font-size: 2.4em;
     margin-left: 30px;
     margin:20px;
 }
-.addNote .fa-microphone{
+.addFile .fa-microphone{
     font-size: 1.5em;
     opacity: 0.5;
     margin-left: 20px;;
 }
-#noteContainer{
-    margin-top:30px;
-    column-count: 3;
-    column-gap: 40px;;
+.fileContainer{
+    width: 100%;
+    margin:30px 0;
 }
-.noteHolder{
-    display: inline-block;
-    width:100%;
-}
-.note{
-    margin-bottom:30px;
-    position: relative;
+.file{
+    margin-bottom:30px;    
     background-color: white;
     display: flex;
+    position: relative;
     flex-direction: column;
     border-radius: 10px;
-    width: 100%;
-    padding:30px ;
+    width: 65%;
+    padding:30px;
+    margin:30px 0;
 }
-.note .date{
+.fileHead{
+    font-size: 1.6em;
+    font-weight: 500;
+    margin:12px 0;
+}
+.fileTitle{
+    font-size: 1.3em;;
+}
+.fileHead i{
+    margin-left: 20px;
     opacity: 0.5;
-    margin-bottom: 10px;
+    color:#72E0A9;
+    font-size: 0/9em;
 }
-.note .desc{
-    line-height: 24px;;
-}
-.note img{
-    z-index: 1;
-    position: absolute;
-    bottom:0;
-    right:0;
-    transform: translate(30%,30%);
-    cursor: pointer;
+.fileDate, .fileExtension{
+    opacity: 0.6;
+    font-size: 1em;
+    margin-top: 10px;
 }
 .modal{
     position: fixed;
@@ -192,7 +194,7 @@ nav img{
     justify-content: center;
     z-index: 3;
 }
-.noteForm{
+.fileForm{
     width:1000px;
     display: flex;
     flex-direction: column;
@@ -201,7 +203,7 @@ nav img{
     border-radius: 10px;
     position: relative;
 }
-.noteForm .fa-times-circle{
+.fileForm .fa-times-circle{
     position: absolute;
     right: 60px;
     top:40px;
@@ -210,7 +212,7 @@ nav img{
     cursor: pointer;
     color:#FF5773;
 }
-.noteForm .head{
+.fileForm .head{
     margin-top: 40px;
     font-size: 2em;
     color:#7272E0;
@@ -227,19 +229,24 @@ form{
     flex-direction: column;
     align-items: center;
 }
-form textarea{
-    outline:none;
-    border: none;
+form input[type=text]{
+    width:450px;
+    outline: none;
+    border:solid #7272E0;
+    padding-left: 15px;
     border-radius: 10px;
-    font-weight: 400;
-    height: 40px;
-    width: 800px;
-    padding-left: 20px;
-    margin:20px 0;
-    padding-top:10px;
-    resize: none;
-    height:200px;
-    padding-right:10px;
+    font-size: 1.2em;
+    height:55px;
+}
+form input[type=file]{
+    margin:25px 0;
+    width:350px;
+    outline: none;
+    background-color: white;
+    border:none;
+    border-radius: 10px;
+    padding:20px;
+    font-size: 1.1em;
 }
 form input[type=submit]{
     outline:none;

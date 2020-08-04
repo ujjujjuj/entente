@@ -1,8 +1,8 @@
 const memberContainer = document.getElementById("memberContainer");
-const noteContainer = document.getElementById("noteContainer");
+const goalContainer = document.querySelector(".goalContainer");
 const searchBar = document.getElementById("searchBar");
 const modalClose = document.querySelector(".fa-times-circle");
-const addNote = document.querySelector(".fa-plus-circle");
+const addGoal = document.querySelector(".fa-plus-circle");
 const modal = document.querySelector(".modal");
 
 function renderMembers(input){
@@ -26,37 +26,57 @@ function renderMembers(input){
     )
 }
 
-function renderNotes(notes,isAdmin){
+function renderGoals(goals,isAdmin){
     let out = '';
-    notes.forEach(note => {
-        console.log(note)
-        let date = new Date(note.date).toISOString().replace("T"," ").replace("Z"," ").slice(0,-4)
-        if(isAdmin){
-            out += (`
-            <div class = "noteHolder">
-                <div class = "note" id = "${note.id}">
-                    <span class = "date">${date}</span>
-                    <span class = "desc">${note.description}</span>
-                    <img src = "/img/trash.png" onclick=deleteNote(this.parentNode.id)>
+    goals.forEach(goal => {
+        console.log(goal)
+        let failed;
+        let timeleft = new Date(goal.deadline).getTime() - new Date(goal.date).getTime()
+        if(timeleft < 0){
+            failed = true;
+        }else{
+            failed = false;
+        }
+        console.log(timeleft)
+        if(!failed){
+            let hoursLeft = Math.floor(timeleft/3600000);
+       
+            if(!goal.isCompleted){
+                out += (`
+                <div class = "goal" id = "${goal._id}">
+                    <span class = "goalTitle">${goal.title}</span>
+                    <span class = "goalStart">Started ${new Date(goal.date).toUTCString()}</span>
+                    <span class = "goalDeadline">${hoursLeft} hours till deadline.</span>
+                    <i class="fa fa-check-circle" aria-hidden="true" style = "color:#AFAFAF" onclick=completeGoal(this.parentNode.id)></i>
                 </div>
-            </div>
-            `)
+                `)
+            }else{
+                out += (`
+                <div class = "goal" id = "${goal._id}">
+                    <span class = "goalTitle">${goal.title}</span>
+                    <span class = "goalStart">Started ${new Date(goal.date).toUTCString()}</span>
+                    <span class = "goalDeadline" style = "color:#72E0A9;">Completed!</span>
+                    <i class="fa fa-check-circle" aria-hidden="true" style = "color:#72E0A9"></i>
+                </div>
+                `)
+            }
         }else{
             out += (`
-            <div class = "noteHolder">
-                <div class = "note" id = "${note.id}">
-                    <span class = "date">${date}</span>
-                    <span class = "desc">${note.description}</span>
-                </div>
+            <div class = "goal" id = "${goal._id}">
+                <span class = "goalTitle">${goal.title}</span>
+                <span class = "goalStart">Started ${new Date(goal.date).toUTCString()}</span>
+                <span class = "goalDeadline" style = "color:#FF5773;">Deadline expired.</span>
+                <i class="fa fa-times-circle" aria-hidden="true" style = "color:#FF5773"></i>
             </div>
             `)
         }
+    
     });
-    noteContainer.innerHTML = out;
+    goalContainer.innerHTML = out;
 }
 
-function deleteNote(id){
-    let url = window.location.href+"/delete?id="+id
+function completeGoal(id){
+    let url = window.location.href+"/resolve?id="+id
     console.log(url);
     fetch(url,{method:"POST"})
     window.location.reload();
@@ -64,13 +84,13 @@ function deleteNote(id){
 
 searchBar.addEventListener("keyup",(e) => {
     let searchString = e.target.value;
-    let filtered = notes.filter( note => {
-        return note.description.toLowerCase().includes(searchString.toLowerCase())
+    let filtered = goals.filter( goal => {
+        return goal.title.toLowerCase().includes(searchString.toLowerCase())
     });
-    renderNotes(filtered,isAdmin)
+    renderGoals(filtered,isAdmin)
 });
 
-addNote.addEventListener("click",()=>{
+addGoal.addEventListener("click",()=>{
     modal.style.display = "flex";
 })
 
@@ -87,8 +107,8 @@ function readAll(){
     if(speech.speaking){
         return
     }
-    for(i=0;i<notes.length;i++){
-        speechStack.push(notes[i].description)
+    for(i=0;i<goals.length;i++){
+        speechStack.push(goals[i].title)
     }
     readText(speechStack[0])
 }
@@ -149,8 +169,8 @@ function listen(){
     isListening = true;
 }
 function stop(){
-    endAudio.play()
     recognition.stop();
+    endAudio.play()
     isListening = false;
 }
 function restart(){
@@ -177,15 +197,15 @@ recognition.onresult = (e) => {
     }else if(results.includes("end") || results.includes("stop")){
         stopSpeech()
         stop()
-    }else if(results.includes("goals") || results.includes("goal")){
+    }else if(results.includes("notes") || results.includes("note")){
         commandAudio.play()
-        setInterval(window.location=window.location.toString().replace('/notes','/goals'),1000)
+        setInterval(window.location=window.location.toString().replace('/goals','/notes'),1000)
     }else if(results.includes("files") || results.includes("file")){
         commandAudio.play()
-        setInterval(window.location=window.location.toString().replace('/notes','/files'),1000)
+        setInterval(window.location=window.location.toString().replace('/goals','/files'),1000)
     }else if(results.includes("chats") || results.includes("chat")  || results.includes("charts")){
         commandAudio.play()
-        setInterval(window.location=window.location.toString().replace('/notes','/chat'),1000)
+        setInterval(window.location=window.location.toString().replace('/goals','/chat'),1000)
     }
 
 }
@@ -196,9 +216,9 @@ recognition.onerror = e =>{
 recognition.onend =  ()=>{
     console.log(speech.speaking)
     if(!speech.speaking){
+        stopSpeech()
         console.log("stopped listening");
-        recognition.stop();
-        stop()
+        stop();
     }else{
         console.log("restarted")
         recognition.start();
@@ -215,4 +235,4 @@ document.addEventListener("keydown",(e) => {
 })
 
 renderMembers(members)
-renderNotes(notes,isAdmin)
+renderGoals(goals);
