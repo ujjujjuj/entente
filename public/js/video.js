@@ -1,7 +1,7 @@
 const socket = io()
 const myPeer = new Peer(undefined,{
     "host":"ez-peer-server.herokuapp.com",
-    "port":80,
+    "port":443,
     "path":"/peerjs"
 })
 const grid = document.querySelector(".videoGrid")
