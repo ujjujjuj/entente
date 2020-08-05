@@ -265,3 +265,9 @@ form input[type=submit]{
     color: white;
     cursor: pointer;
 }
+
+i:hover, .sidebar div:hover{
+    opacity: 1;
+    cursor: pointer;
+    transition: linear all 0.2s;
+}

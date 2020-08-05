@@ -181,3 +181,9 @@ nav img{
     color:#7272E0;
     font-size: 1.4em;
 }
+i:hover, .sidebar div:hover{
+    opacity: 1;
+    cursor: pointer;
+    transition: linear all 0.2s;
+}
+
