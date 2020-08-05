@@ -215,7 +215,7 @@ recognition.onerror = e =>{
 }
 recognition.onend =  ()=>{
     console.log(speech.speaking)
-    if(!speech.speaking){
+    if(!speech.speaking && isListening){
         stopSpeech()
         console.log("stopped listening");
         stop();

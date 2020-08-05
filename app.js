@@ -1,4 +1,5 @@
 const express = require("express");
+const sslRedirect = require('heroku-ssl-redirect');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload')
 const cookieParser = require('cookie-parser');
@@ -15,6 +16,7 @@ app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 app.use(express.static(__dirname + '/public'));
+app.use(sslRedirect());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload())
 app.use(cookieParser());
