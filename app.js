@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload')
 const cookieParser = require('cookie-parser');
 const mongoose = require("mongoose");
-const path = require('path');
-const { PeerServer } = require('peer');
 
 const { getUsername } = require('./middleware/chat.js');
 
@@ -104,8 +102,6 @@ io.on("connection",async (socket) => {
 
 })
 
-
-const peerServer = PeerServer({ port: 3000, path: '/' });
 server.listen(port,() => {
     console.log("Listening on port "+port);
 });
